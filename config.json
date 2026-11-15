@@ -1,0 +1,43 @@
+{
+  "name": "Smart Canteen",
+  "slot_minutes": 5,
+  "day_start": 510,
+  "day_end": 1050,
+  "hold_seconds": 300,
+  "hold_seconds_upi": 600,
+  "sec_per_min": 10,
+  "demo_start": 770,
+  "default_capacity": 12,
+  "stock_buffer": 1.12,
+  "history_days": 42,
+  "hours": [9, 10, 11, 12, 13, 14, 15, 16, 17],
+  "weekday_factor": [1.0, 0.96, 1.0, 1.04, 1.12, 0.62, 0.0],
+  "sessions": [
+    { "id": "morning", "label": "Morning break", "from": 630, "to": 675 },
+    { "id": "lunch", "label": "Lunch break", "from": 750, "to": 840 },
+    { "id": "evening", "label": "Evening break", "from": 915, "to": 960 }
+  ],
+  "sections": {
+    "3A": { "label": "ISE 3A", "breaks": { "morning": [630, 645], "lunch": [750, 795], "evening": [915, 930] } },
+    "5A": { "label": "ISE 5A", "breaks": { "morning": [645, 660], "lunch": [780, 825], "evening": [930, 945] } },
+    "7A": { "label": "ISE 7A", "breaks": { "morning": [660, 675], "lunch": [795, 840], "evening": [945, 960] } }
+  },
+  "shapes": {
+    "snack": [0.25, 0.9, 0.8, 1.1, 1.2, 0.5, 1.0, 0.7, 0.2],
+    "meal": [0.1, 0.35, 0.5, 1.5, 2.2, 0.7, 0.5, 0.35, 0.1],
+    "drink": [0.3, 1.1, 0.9, 1.0, 1.0, 0.5, 1.3, 0.9, 0.25]
+  },
+  "cat_shape": { "Snacks": "snack", "Meals": "meal", "Drinks": "drink" },
+  "menu": [
+    { "id": "chai", "name": "Masala chai", "category": "Drinks", "price": 12, "prep": 2, "art": "chai", "tint": "#FFE0A3", "daily": 80 },
+    { "id": "samosa", "name": "Samosa (2 pc)", "category": "Snacks", "price": 20, "prep": 3, "art": "samosa", "tint": "#FFD6E3", "daily": 64 },
+    { "id": "vada", "name": "Vada pav", "category": "Snacks", "price": 20, "prep": 3, "art": "vada", "tint": "#D8F5E6", "daily": 48 },
+    { "id": "sandwich", "name": "Veg sandwich", "category": "Snacks", "price": 35, "prep": 5, "art": "sandwich", "tint": "#DDE3FF", "daily": 38 },
+    { "id": "maggi", "name": "Maggi", "category": "Meals", "price": 40, "prep": 6, "art": "maggi", "tint": "#FFE0A3", "daily": 46 },
+    { "id": "dosa", "name": "Masala dosa", "category": "Meals", "price": 60, "prep": 8, "art": "dosa", "tint": "#FFD6E3", "daily": 52 },
+    { "id": "roll", "name": "Paneer roll", "category": "Meals", "price": 70, "prep": 7, "art": "roll", "tint": "#D8F5E6", "daily": 30 },
+    { "id": "coffee", "name": "Cold coffee", "category": "Drinks", "price": 45, "prep": 3, "art": "coffee", "tint": "#DDE3FF", "daily": 44 }
+  ],
+  "banks": ["State Bank", "HDFC Bank", "ICICI Bank", "Axis Bank", "Kotak Bank", "Punjab National Bank"],
+  "demo_names": ["Aarav", "Diya", "Kabir", "Meera", "Rohan", "Isha", "Vihaan", "Ananya", "Arjun", "Saanvi", "Kiara", "Advait", "Navya", "Ishaan", "Myra", "Reyansh", "Anaya", "Vivaan", "Aditi", "Krish"]
+}
