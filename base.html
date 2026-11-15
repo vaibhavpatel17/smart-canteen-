@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="{% block themecolor %}#FFD23F{% endblock %}">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="{% block apptitle %}Canteen{% endblock %}">
+<link rel="manifest" href="{% block manifest %}/manifest.webmanifest{% endblock %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='icons/favicon-32.png') }}">
+<link rel="apple-touch-icon" href="{% block touchicon %}{{ url_for('static', filename='icons/apple-touch-icon.png') }}{% endblock %}">
+<title>{% block title %}Smart Canteen{% endblock %}</title>
+{% for f in ['fonts', 'base', 'shell', 'student', 'kitchen'] %}<link rel="stylesheet" href="{{ url_for('static', filename='css/' ~ f ~ '.css') }}?v={{ v }}">
+{% endfor %}
+</head>
+<body data-page="{% block page %}{% endblock %}">
+{% include 'sprite.html' %}
+<div id="proto" class="proto" hidden></div>
+<div class="stage" id="stage" data-mode="{% block mode %}student{% endblock %}">
+{% block roots %}{% endblock %}
+</div>
+{% for f in ['common', 'qrcode', 'api-remote', 'shell', 'student', 'kitchen', 'kitchen-pages', 'boot'] %}<script src="{{ url_for('static', filename='js/' ~ f ~ '.js') }}?v={{ v }}"></script>
+{% endfor %}
+<script>if ('serviceWorker' in navigator) addEventListener('load', function () { navigator.serviceWorker.register('/sw.js').catch(function () {}); });</script>
+</body>
+</html>

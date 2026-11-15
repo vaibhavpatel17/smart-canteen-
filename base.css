@@ -1,0 +1,98 @@
+/* Layout idea: a yellow, sticker-covered hero that is loud on purpose; the menu below is calm
+   cards on lavender; the kitchen screen is a separate, always-dark, big-target tool. */
+:root{
+  --f-display:'Bricolage Grotesque','Arial Narrow',system-ui,sans-serif;
+  --f-body:'Figtree',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --bg:#F4F2FF; --surface:#FFFFFF; --surface-2:#E7E3FF; --text:#16122B; --muted:#5A5580;
+  --edge:#16122B; --shadow:#16122B; --focus:#4259FF;
+  --ink:#16122B;                    /* fixed ink: text on bright fills in either theme */
+  --yellow:#FFD23F; --pink:#FF5C93; --blue:#4259FF; --green:#22C58B; --red:#FF4D5E; --orange:#FF9A3D;
+  --bw:2.5px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13102A; --surface:#1F1A44; --surface-2:#2B2560; --text:#F4F2FF; --muted:#B0AADC;
+    --edge:#8E86E6; --shadow:#07051A; --focus:#A9B7FF; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13102A; --surface:#1F1A44; --surface-2:#2B2560; --text:#F4F2FF; --muted:#B0AADC;
+  --edge:#8E86E6; --shadow:#07051A; --focus:#A9B7FF; color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+@supports (height:100dvh){html,body{height:100dvh}}
+body{display:flex;flex-direction:column;margin:0;background:var(--bg);color:var(--text);
+  font:500 16px/1.45 var(--f-body);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.num{font-variant-numeric:tabular-nums}
+svg.ico{width:1.2em;height:1.2em;flex:none}
+
+
+/* ---------- shared pieces ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:52px;padding:0 1.4em;border:var(--bw) solid var(--edge);border-radius:999px;
+  background:var(--pink);color:var(--ink);font:800 1.02rem var(--f-body);box-shadow:4px 4px 0 var(--shadow);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--shadow)}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--shadow)}
+.btn.white{background:#fff}
+.btn.yellow{background:var(--yellow)}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none;transform:none}
+.sticker{display:block;width:100%;height:100%;overflow:visible}
+.die{filter:drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(3px 4px 0 rgba(22,18,43,.35))}
+.toast{position:absolute;left:50%;top:14px;z-index:90;max-width:calc(100% - 32px);width:max-content;transform:translateX(-50%);padding:.7em 1.1em;border:var(--bw) solid var(--edge);border-radius:20px;text-align:center;
+  background:var(--ink);color:#fff;font-weight:700;font-size:.95rem;box-shadow:4px 4px 0 var(--shadow);animation:toast .35s cubic-bezier(.2,1.4,.4,1)}
+.toast button{margin-left:.8em;padding:0;border:0;background:none;color:var(--yellow);font-weight:800;text-decoration:underline}
+.confetti{position:absolute;inset:0;z-index:95;width:100%;height:100%;pointer-events:none}
+.veg{display:inline-block;width:14px;height:14px;border:2px solid #1E9E5A;border-radius:3px;position:relative;flex:none}
+.veg::after{content:"";position:absolute;inset:2px;border-radius:50%;background:#1E9E5A}
+.stepper{display:inline-flex;align-items:center;border:var(--bw) solid var(--edge);border-radius:999px;background:var(--surface);overflow:hidden}
+.stepper button{width:44px;height:44px;border:0;background:transparent;display:grid;place-items:center}
+.stepper button:active{background:var(--surface-2)}
+.stepper button[disabled]{opacity:.35}
+.stepper output{min-width:2ch;text-align:center;font-weight:800;font-variant-numeric:tabular-nums}
+
+
+/* ---------- motion ---------- */
+@keyframes drop{from{opacity:0;transform:translateY(-34px) rotate(-6deg) scale(.9)}}
+@keyframes scrib{from{transform:rotate(-3deg) scaleX(0)}}
+@keyframes wiggle{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(7deg) translateY(-3px)}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-14px) rotate(calc(var(--r,0deg) * -1))}}
+@keyframes tkin{from{opacity:0;transform:translateY(40px) rotate(-8deg) scale(.9)}}
+@keyframes marq{to{transform:translateX(-100%)}}
+@keyframes blink{50%{opacity:.25}}
+@keyframes on1{0%{background:#fff}6%,100%{background:var(--green)}}
+@keyframes on2{0%,30%{background:#fff}36%,100%{background:var(--green)}}
+@keyframes on3{0%,60%{background:#fff}66%,100%{background:var(--green)}}
+@keyframes stamp{0%,62%{opacity:0;transform:rotate(-14deg) scale(2.4)}68%{opacity:1;transform:rotate(-14deg) scale(.9)}72%,92%{opacity:1;transform:rotate(-14deg) scale(1)}98%,100%{opacity:0;transform:rotate(-14deg) scale(1)}}
+@keyframes stamp2{from{opacity:0;transform:translateY(-50%) rotate(-12deg) scale(2.4)}}
+@keyframes pop{0%,62%{opacity:0;transform:translateY(18px) scale(.8)}68%{opacity:1;transform:translateY(-5px) scale(1.04)}72%,92%{opacity:1;transform:none}98%,100%{opacity:0;transform:none}}
+@keyframes rise{from{transform:translateY(100%)}}
+@keyframes slideup{from{transform:translateY(60px);opacity:0}}
+@keyframes fade{from{opacity:0}}
+@keyframes toast{from{opacity:0;transform:translateX(-50%) translateY(-20px) scale(.9)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,210,63,.7)}50%{box-shadow:0 0 0 8px rgba(255,210,63,0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes popin{from{opacity:0;transform:scale(.4) rotate(-20deg)}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(255,92,147,.55)}100%{box-shadow:0 0 0 22px rgba(255,92,147,0)}}
+@keyframes flash{0%,40%{box-shadow:0 0 0 6px var(--col)}100%{box-shadow:0 0 0 0 transparent}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+
+/* ---------- start-up failure screen ---------- */
+.fatal{display:grid;place-content:center;justify-items:center;gap:12px;height:100%;padding:24px;text-align:center;background:var(--bg)}
+.fatal h1{margin:0;font:800 1.6rem/1.1 var(--f-display)}
+.fatal p{margin:0;max-width:34ch;color:var(--muted);font-weight:600}
+
+@supports (height:100dvh){html,body{height:100dvh}}
+.boot-err{display:grid;place-content:center;justify-items:center;gap:14px;height:100%;padding:24px;text-align:center;font-weight:700}
+.boot-err p{margin:0;max-width:30ch}
+.boot-err button{min-height:48px;padding:0 1.4em;border:2.5px solid var(--edge);border-radius:999px;background:var(--yellow);color:var(--ink);font-weight:800}

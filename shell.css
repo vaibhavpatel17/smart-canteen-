@@ -1,0 +1,43 @@
+/* ---------- prototype bar + stage (not part of either app) ---------- */
+.proto{flex:none;position:relative;z-index:100;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;
+  padding:8px 12px;background:#16122B;color:#fff;border-bottom:2px solid #000;--focus:#FFD23F}
+.proto-title{margin-right:auto;font:800 1rem/1 var(--f-display);font-stretch:80%;display:none}
+.proto-title small{font:600 .75rem var(--f-body);color:#B0AADC;margin-left:8px}
+.seg{display:flex;gap:2px;padding:3px;border-radius:999px;background:#2A2554}
+.seg button{min-height:36px;padding:0 14px;border:0;border-radius:999px;background:transparent;color:#D5D1FF;font-weight:700;font-size:.85rem}
+.seg button[aria-pressed="true"]{background:#FFD23F;color:#16122B}
+.seg a{display:grid;place-items:center;min-height:36px;padding:0 14px;border-radius:999px;color:#D5D1FF;font-weight:700;font-size:.85rem;text-decoration:none}
+.seg a[aria-current="page"]{background:#FFD23F;color:#16122B}
+.seg .only-wide{display:none}
+.tbtn{display:grid;place-items:center;width:36px;height:36px;border:2px solid #4B4590;border-radius:50%;background:transparent;color:#fff}
+.tbtn .ico{width:18px;height:18px}
+.pop .lbl2{margin:2px 0 -4px;font-weight:800;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:#4F4A78}
+.clock-chip{display:flex;align-items:center;gap:8px;min-height:36px;margin-left:auto;padding:0 12px;border:2px solid #4B4590;border-radius:999px;
+  background:transparent;color:#fff;font-weight:700;font-size:.85rem}
+.clock-chip b{font-variant-numeric:tabular-nums}
+.clock-chip .lbl{display:none}
+.clock-chip i{width:8px;height:8px;border-radius:50%;background:#22C58B;animation:blink 1.4s infinite}
+.clock-chip.paused i{background:#FF9A3D;animation:none}
+.pop{position:absolute;top:100%;right:12px;margin-top:6px;width:min(330px,calc(100% - 24px));display:grid;gap:10px;padding:14px;
+  background:#fff;color:#16122B;border:2.5px solid #16122B;border-radius:18px;box-shadow:5px 5px 0 #000;--focus:#4259FF}
+.pop h3{margin:0;font:800 1rem var(--f-display)}
+.pop p{margin:0;font-size:.85rem;color:#4F4A78}
+.pop .row{display:flex;flex-wrap:wrap;gap:6px}
+.pbtn{min-height:38px;padding:0 12px;border:2px solid #16122B;border-radius:999px;background:#F4F2FF;color:#16122B;font-weight:800;font-size:.85rem}
+.pbtn:active{transform:translateY(1px)}
+.pbtn.hot{background:#FF5C93}
+.pbtn.warn{background:#fff;border-style:dashed}
+@media (min-width:640px){.proto-title{display:block}.clock-chip{margin-left:0}.clock-chip .lbl{display:inline}}
+@media (min-width:1200px){.seg .only-wide{display:block}}
+
+.stage{flex:1;min-height:0;display:flex}
+.stage>.app{flex:1;min-width:0}
+.stage[data-mode="student"] #kitchenRoot,.stage[data-mode="kitchen"] #studentRoot{display:none}
+.stage[data-mode="split"]{gap:28px;padding:18px 24px;justify-content:center;background:var(--surface-2)}
+.stage[data-mode="split"] #studentRoot{flex:none;width:390px;border:8px solid #16122B;border-radius:42px;box-shadow:8px 8px 0 var(--shadow)}
+.stage[data-mode="split"] #kitchenRoot{max-width:1120px;border:8px solid #16122B;border-radius:26px;box-shadow:8px 8px 0 var(--shadow)}
+
+.app{position:relative;height:100%;overflow:hidden;overflow:clip;container-type:inline-size;background:var(--bg);color:var(--text)}
+
+.boot{margin:0;padding:40px 20px;text-align:center;color:var(--muted);font-weight:700}
+.pbtn:disabled{opacity:.4;pointer-events:none}
